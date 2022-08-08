@@ -1,6 +1,7 @@
-node_modules/
+/node_modules
+/.vscode
+/.idea
+/.history
+
 src/lib/route/utils.ts
 package-lock.json
-.vscode/
-.idea/
-.history/
