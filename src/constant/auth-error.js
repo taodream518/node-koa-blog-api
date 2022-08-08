@@ -7,25 +7,25 @@
 // 缺少token参数
 const TOKEN_PARAMS_ERROR = {
     code: "11000",
-    message: "缺少token参数",
+    msg: "缺少token参数",
 };
 
 // token非法错误
 const TOKEN_ILLEGAL_ERROR = {
     code: "11001",
-    message: "无效的token",
+    msg: "无效的token",
 };
 
 // token过期错误
 const TOKEN_EXPIRED_ERROR = {
     code: "11002",
-    message: "token已过期",
+    msg: "token已过期",
 };
 
 // token过期错误
 const TOKEN_UNKNOW_ERROR = {
     code: "11009",
-    message: "未知的token错误",
+    msg: "未知的token错误",
 };
 
 

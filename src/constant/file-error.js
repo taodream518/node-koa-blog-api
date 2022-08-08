@@ -7,13 +7,13 @@
 // 文件上传错误
 const FILE_UPLOAD_ERROR = {
     code: "12000",
-    message: "文件上传失败",
+    msg: "文件上传失败",
 };
 
 // 文件上传类型错误
 const FILE_UPLOAD_TYPE_ERROR = {
     code: "12001",
-    message: "不允许上传的文件类型",
+    msg: "不允许上传的文件类型",
 };
 
 

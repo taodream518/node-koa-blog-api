@@ -2,7 +2,7 @@
  * @Descripttion: 用户验证器
  * @Author: Coder-Tao
  * @Date: 2022-06-18 22:39:03
- * @LastEditTime: 2022-06-24 13:12:41
+ * @LastEditTime: 2022-07-28 17:13:09
  */
 
 const bcrypt = require("bcryptjs");
@@ -46,7 +46,7 @@ class UserValidator {
     // 验证用户登录
     async validateUserLogin(ctx, next) {
         const { username, password } = ctx.request.body;
-        console.log(username, password, "a");
+        console.log("用户登录提交的参数：", username, password);
         try {
             // 1. 参数校验 (合法性)
             if (!username || !password) {

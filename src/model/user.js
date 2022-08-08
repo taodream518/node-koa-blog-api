@@ -2,12 +2,12 @@
  * @Descripttion: 用户表
  * @Author: Coder-Tao
  * @Date: 2022-06-18 16:40:38
- * @LastEditTime: 2022-06-21 22:50:14
+ * @LastEditTime: 2022-07-28 17:04:05
  */
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
 
-const User = sequelize.define("tb_users", {
+const User = sequelize.define("tb_user", {
     // id 会被sequelize自动创建并管理
     username: {
         type: DataTypes.STRING,
@@ -20,7 +20,7 @@ const User = sequelize.define("tb_users", {
         allowNull: false,
         comment: "密码",
     },
-    nickName: {
+    name: {
         type: DataTypes.STRING(),
         allowNull: false,
         defaultValue: `昵称_${Math.random().toString(36).slice(2)}`, // 生产随机昵称
@@ -32,13 +32,22 @@ const User = sequelize.define("tb_users", {
         defaultValue: null,
         comment: "用户头像",
     },
+    email: {
+        type: DataTypes.TINYINT,
+        allowNull: true,
+        defaultValue: null,
+        comment: "用户邮箱",
+        validate: {
+            isEmail: true,
+        },
+    },
     sex: {
         type: DataTypes.TINYINT,
         allowNull: false,
         defaultValue: 0,
         comment: "性别【0: 保密(默认) 1: 男 2: 女】",
     },
-    userStatus: {
+    status: {
         type: DataTypes.TINYINT,
         allowNull: false,
         defaultValue: 0,
@@ -49,12 +58,6 @@ const User = sequelize.define("tb_users", {
         allowNull: false,
         defaultValue: 0,
         comment: "是否管理员【0: 非管理员(默认) 1: 管理员】",
-    },
-    isDelete: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: 0,
-        comment: "是否删除【0: 未删除(默认); 1: 已删除】",
     },
 });
 

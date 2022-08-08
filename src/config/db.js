@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Author: Coder-Tao
  * @Date: 2022-06-18 16:24:50
- * @LastEditTime: 2022-06-21 23:12:34
+ * @LastEditTime: 2022-07-28 16:44:48
  */
 
 const { MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PWD, MYSQL_DB } = require("./index");
@@ -26,11 +26,11 @@ const sequelize = new Sequelize(MYSQL_DB, MYSQL_USER, MYSQL_PWD, {
         createdAt: "createdTime",
         updatedAt: "updatedTime",
 
-        paranoid: false,
+        paranoid: true,
         deletedAt: "deleted_time", // 指定是否创建 deletedAt字段(改为deleted_time) 【paranoid启用才能工作】
         underscored: true, // 驼峰转下划线
 
-        freezeTableName: true, // 是否禁用修改表名 【默认会转复数，tb_user -> tb_users】
+        freezeTableName: false, // 是否禁用修改表名 【默认会转复数，tb_user -> tb_users】
     },
     // 添加这个配置
     dialectOptions: {

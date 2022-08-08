@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Author: Coder-Tao
  * @Date: 2022-06-18 16:09:54
- * @LastEditTime: 2022-06-22 00:49:44
+ * @LastEditTime: 2022-07-28 17:11:36
  */
 const UserService = require("../service/user");
 const jwt = require("jsonwebtoken");
@@ -23,10 +23,9 @@ class UserController {
         ctx.body = {
             code: 0,
             data: {
-                id: res.id,
                 username: res.username,
             },
-            message: "用户注册成功!",
+            msg: "用户注册成功!",
         };
     }
 
@@ -47,13 +46,28 @@ class UserController {
 
             ctx.body = {
                 code: 0,
-                message: "用户登录成功",
+                msg: "用户登录成功",
                 data: {
                     token: jwt.sign(signData, JWT_SECRET, { expiresIn: "1d" }),
                 },
             };
         } catch (err) {
             console.error("用户登录失败", err);
+        }
+    }
+
+    // 获取用户信息
+    async userInfo(ctx, next) {
+        const { id } = ctx.state.user;
+        try {
+            const res = await UserService.findOne({ id });
+            ctx.body = {
+                code: 0,
+                msg: "获取用户信息成功",
+                data: res,
+            };
+        } catch (err) {
+            console.error("获取用户信息失败", err);
         }
     }
 
@@ -66,7 +80,7 @@ class UserController {
         // 3. 返回结果
         ctx.body = {
             code: 0,
-            message: "获取用户列表成功",
+            msg: "获取用户列表成功",
             data: res,
         };
     }
@@ -81,7 +95,7 @@ class UserController {
             // 3. 返回结果
             ctx.body = {
                 code: 0,
-                message: "修改密码成功",
+                msg: "修改密码成功",
                 data: res,
             };
         } catch (err) {

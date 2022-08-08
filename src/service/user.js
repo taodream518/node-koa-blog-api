@@ -2,10 +2,10 @@
  * @Descripttion: 用户服务
  * @Author: Coder-Tao
  * @Date: 2022-06-18 16:23:19
- * @LastEditTime: 2022-06-22 01:05:00
+ * @LastEditTime: 2022-07-28 16:43:33
  */
 const User = require("../model/user");
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
 
 class UserService {
     // 新增用户
@@ -22,7 +22,7 @@ class UserService {
      */
     async updatePassword({ id, password }) {
         const where = { id };
-        
+
         const user = {};
         password && Object.assign(user, { password });
 
@@ -38,15 +38,15 @@ class UserService {
          * 2）[Op.eq]:值
          */
         const where = {
-            isDelete: {
-                [Op.eq]: false,
-            },
+            // isDelete: {
+            //     [Op.eq]: false,
+            // },
         };
 
         // 处理模糊查询
-        const { username = "", nickName = "" } = condition;
+        const { username = "", name = "" } = condition;
         username && Object.assign(where, { username: { [Op.like]: `%${username}%` } });
-        nickName && Object.assign(where, { nickName: { [Op.like]: `%${name}%` } });
+        name && Object.assign(where, { name: { [Op.like]: `%${name}%` } });
 
         const offset = (pageNumber - 1) * pageSize;
         const { count, rows } = await User.findAndCountAll({
@@ -74,11 +74,7 @@ class UserService {
     // 用户信息
     async findOne({ id, username, password, isAdmin }) {
         // 条件
-        const where = {
-            isDelete: {
-                [Op.eq]: false,
-            },
-        };
+        const where = {};
 
         id && Object.assign(where, { id });
         username && Object.assign(where, { username });
@@ -86,7 +82,7 @@ class UserService {
         isAdmin && Object.assign(where, { isAdmin });
 
         const res = await User.findOne({
-            attributes: ["id", "username", "password", "is_admin"],
+            attributes: ["id", "username", "password", "name", "avatar", "sex", "email", "isAdmin"],
             where,
         });
 

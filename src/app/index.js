@@ -2,7 +2,7 @@
  * @Descripttion:
  * @Author: Coder-Tao
  * @Date: 2022-06-18 15:49:08
- * @LastEditTime: 2022-07-16 02:06:36
+ * @LastEditTime: 2022-07-28 16:50:26
  */
 const path = require("path");
 const Koa = require("koa");
@@ -19,6 +19,7 @@ app.use(KoaStatic(path.join(__dirname, "../../public")));
 // 1.引入路由表
 const userRouter = require("../routes/user");
 const fileRouter = require("../routes/file");
+const categoryRouter = require("../routes/category");
 
 // 注册中间件
 app.use(
@@ -39,9 +40,15 @@ app.use(
 // 2. 注册路由
 app.use(userRouter.routes());
 app.use(fileRouter.routes());
+app.use(categoryRouter.routes());
 
 // 错误统一处理
 const error = require("./error");
 app.on("error", error.handle);
+
+// 错误不明显处理
+process.on("unhandledRejection", (reason, p) => {
+    console.log("Unhandled Rejection at: Promise", p, "reason:", reason);
+});
 
 module.exports = app;

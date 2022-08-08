@@ -17,7 +17,7 @@ class FileController {
 
             ctx.body = {
                 code: 0,
-                message: "文件上传成功",
+                msg: "文件上传成功",
                 data: {
                     url,
                     filePath: filePath + "/",
